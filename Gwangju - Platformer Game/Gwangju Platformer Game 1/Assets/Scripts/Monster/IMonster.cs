@@ -1,5 +1,4 @@
 public interface IMonster
 {
-    void Move();
-    void Attack();
+    void Die();
 }

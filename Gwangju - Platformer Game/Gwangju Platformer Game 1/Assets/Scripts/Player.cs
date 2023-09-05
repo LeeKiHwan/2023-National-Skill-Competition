@@ -5,15 +5,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Move")]
     public Rigidbody rb;
+    public Collider col;
     public float speed;
     public float jumpForce;
+    public bool isJump;
+
+    [Header("Dash")]
     public bool isDash;
     public float dashForce;
     public float dashTime;
 
     [Header("Under Check")]
-    public float underCheckRayDis;
+    public Vector3 underCheckPos;
+    public Vector3 underCheckSize;
     public bool isExistUnder;
 
     public ItemType curItem;
@@ -27,19 +33,20 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        col.transform.rotation = Quaternion.identity;
+
         if (!isDash)
         {
             float x = Input.GetAxis("Horizontal") * speed;
             rb.velocity = new Vector3(x, rb.velocity.y, rb.velocity.z);
         }
+
+        if (rb.velocity.y < 0) isJump = false;
     }
 
     void UnderCheck()
     {
-        RaycastHit hit;
-        Physics.Raycast(transform.position, Vector3.down, out hit, underCheckRayDis);
-
-        if (hit.collider != null) isExistUnder = true;
+        if (Physics.OverlapBox(transform.position + underCheckPos, underCheckSize) != null) isExistUnder = true;
         else isExistUnder = false;
     }
 
@@ -54,8 +61,6 @@ public class Player : MonoBehaviour
                     break;
                 case ItemType.DashItem:
                     StartCoroutine(Dash());
-                    break;
-                case ItemType.RotateItem:
                     break;
             }
             curItem = ItemType.None;
@@ -75,12 +80,12 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.25f);
-        Gizmos.DrawRay(transform.position, Vector3.down * underCheckRayDis);
+        Gizmos.DrawCube(transform.position + underCheckPos, underCheckSize);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision != null && isExistUnder)
+        if (collision != null && isExistUnder && !isJump)
         {
             if (collision.gameObject.GetComponent<SpecialBlock>())
             {
@@ -98,10 +103,13 @@ public class Player : MonoBehaviour
                         break;
 
                     case ESpecialBlock.TrapBlock:
+                        InGameManager.Instance.Die();
                         break;
                 }
             }
             else rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            isJump = true;
         }
     }
 
@@ -109,7 +117,14 @@ public class Player : MonoBehaviour
     {
         if (other.GetComponent<Item>())
         {
-            curItem = other.GetComponent<Item>().itemType;
+            if (other.GetComponent<Item>().itemType == ItemType.RotateItem)
+            {
+                InGameManager.Instance.SetTargetRotation(other.GetComponent<Item>().rotateVec);
+            }
+            else
+            {
+                curItem = other.GetComponent<Item>().itemType;
+            }
             Destroy(other.gameObject);
         }
     }

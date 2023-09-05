@@ -12,5 +12,7 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
+    public Vector3 rotateVec;
+
     public ItemType itemType;
 }
