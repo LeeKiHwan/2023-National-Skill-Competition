@@ -16,5 +16,6 @@ public class WalkMonster : MonoBehaviour, IMonster
 
     public void Move()
     {
+
     }
 }
