@@ -5,17 +5,25 @@ using UnityEngine;
 public class WalkMonster : MonoBehaviour, IMonster
 {
     public Rigidbody rb;
+    public Collider col;
+    public Transform mesh;
     public float speed;
     public int moveDir;
+    public GameObject dieEffect;
+    public AudioClip dieSFX;
 
     public Vector3 wallCheckPos;
     public Vector3 wallCheckSize;
-
     public Vector3 floorCheckPos;
     public Vector3 floorCheckSize;
 
+    public int score;
+
     private void Update()
     {
+        col.transform.rotation = Quaternion.identity;
+        mesh.rotation = Quaternion.Euler(0, 180, 0);
+
         Move();
         CheckRotate();
     }
@@ -53,6 +61,11 @@ public class WalkMonster : MonoBehaviour, IMonster
 
     public void Die()
     {
-
+        InGameManager.Instance.AddScore(score);
+        InGameManager.Instance.monsters.Remove(gameObject);
+        Instantiate(dieEffect, transform.position, Quaternion.identity);
+        SoundManager.Instance.PlaySFX(dieSFX, false);
+        InGameManager.Instance.CheckMonster();
+        Destroy(gameObject);
     }
 }

@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public float speed;
     public float jumpForce;
     public bool isJump;
+    public int blockTouch;
+    public bool isStun;
 
     [Header("Dash")]
     public bool isDash;
@@ -20,14 +22,13 @@ public class Player : MonoBehaviour
     [Header("Under Check")]
     public Vector3 underCheckPos;
     public Vector3 underCheckSize;
-    public bool isExistUnder;
 
     public ItemType curItem;
+    public AudioClip itemGetSFX;
 
     private void Update()
     {
         Move();
-        UnderCheck();
         UseItem();
     }
 
@@ -35,19 +36,19 @@ public class Player : MonoBehaviour
     {
         col.transform.rotation = Quaternion.identity;
 
-        if (!isDash)
+        if (!isDash && !isStun)
         {
             float x = Input.GetAxis("Horizontal") * speed;
             rb.velocity = new Vector3(x, rb.velocity.y, rb.velocity.z);
         }
+        else if (isStun) rb.velocity = Vector3.zero;
 
-        if (rb.velocity.y < 0) isJump = false;
-    }
-
-    void UnderCheck()
-    {
-        if (Physics.OverlapBox(transform.position + underCheckPos, underCheckSize) != null) isExistUnder = true;
-        else isExistUnder = false;
+        if (rb.velocity.y > 0)
+        {
+            isJump = true;
+            blockTouch = 0;
+        }
+        else isJump = false;
     }
 
     void UseItem()
@@ -76,17 +77,40 @@ public class Player : MonoBehaviour
 
         yield break;
     }
+    
+    IEnumerator Stun(float time)
+    {
+        isStun = true;
+        yield return new WaitForSeconds(time);
+        isStun = false;
+
+        yield break;
+    }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.25f);
-        Gizmos.DrawCube(transform.position + underCheckPos, underCheckSize);
+        Gizmos.DrawCube(transform.position + underCheckPos, underCheckSize * 2);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision != null && isExistUnder && !isJump)
+        if (collision.gameObject.GetComponent<IMonster>() != null)
         {
+            if (Physics.OverlapBox(transform.position + underCheckPos, underCheckSize, Quaternion.identity, 1 << LayerMask.NameToLayer("Monster")).Length > 0)
+            {
+                collision.gameObject.GetComponent<IMonster>().Die();
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+            else
+            {
+                InGameManager.Instance.Die();
+            }
+        }
+        else if (!isJump && Physics.OverlapBox(transform.position + underCheckPos, underCheckSize, Quaternion.identity, 1 << LayerMask.NameToLayer("Platform")).Length > 0 && blockTouch == 0)
+        {
+            float jumpForceValue = 1;
+
             if (collision.gameObject.GetComponent<SpecialBlock>())
             {
                 ESpecialBlock blockType = collision.gameObject.GetComponent<SpecialBlock>().thisBlockType;
@@ -94,11 +118,10 @@ public class Player : MonoBehaviour
                 switch (blockType)
                 {
                     case ESpecialBlock.JumpBlock:
-                        rb.AddForce(Vector3.up * jumpForce * 1.5f, ForceMode.Impulse);
+                        jumpForceValue = 1.5f;
                         break;
 
                     case ESpecialBlock.TempBlock:
-                        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                         Destroy(collision.gameObject);
                         break;
 
@@ -107,9 +130,8 @@ public class Player : MonoBehaviour
                         break;
                 }
             }
-            else rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-            isJump = true;
+            rb.AddForce(Vector3.up * jumpForce * jumpForceValue, ForceMode.Impulse);
+            ++blockTouch;
         }
     }
 
@@ -119,6 +141,8 @@ public class Player : MonoBehaviour
         {
             if (other.GetComponent<Item>().itemType == ItemType.RotateItem)
             {
+                StartCoroutine(Stun(0.01f));
+                transform.position = other.transform.position;
                 InGameManager.Instance.SetTargetRotation(other.GetComponent<Item>().rotateVec);
             }
             else
@@ -126,6 +150,11 @@ public class Player : MonoBehaviour
                 curItem = other.GetComponent<Item>().itemType;
             }
             Destroy(other.gameObject);
+            SoundManager.Instance.PlaySFX(itemGetSFX, false);
+        }
+        if (other.CompareTag("UnderBlock"))
+        {
+            InGameManager.Instance.Die();
         }
     }
 }

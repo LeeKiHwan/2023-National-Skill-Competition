@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class DashMonster : MonoBehaviour, IMonster
 {
     public Rigidbody rb;
+    public Collider col;
+    public Transform mesh;
     public bool isDash;
     public float dashForce;
     public float dashTime;
     public float playerCheckRange;
+    public int score;
+    public GameObject dieEffect;
+    public AudioClip dieSFX;
 
     private void Update()
     {
+        col.transform.rotation = Quaternion.identity;
+        mesh.rotation = Quaternion.Euler(0, 180, 0);
+
         Attack();
     }
 
@@ -21,7 +30,6 @@ public class DashMonster : MonoBehaviour, IMonster
 
         if (playerCheck.Length > 0 && !isDash)
         {
-            Debug.Log(playerCheck[0].name);
             StartCoroutine(Dash(playerCheck[0].transform.position));
         }
 
@@ -50,6 +58,11 @@ public class DashMonster : MonoBehaviour, IMonster
 
     public void Die()
     {
-
+        InGameManager.Instance.AddScore(score);
+        InGameManager.Instance.monsters.Remove(gameObject);
+        Instantiate(dieEffect, transform.position, Quaternion.identity);
+        SoundManager.Instance.PlaySFX(dieSFX, false);
+        InGameManager.Instance.CheckMonster();
+        Destroy(gameObject);
     }
 }

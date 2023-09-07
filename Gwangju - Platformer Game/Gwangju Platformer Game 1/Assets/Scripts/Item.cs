@@ -7,7 +7,8 @@ public enum ItemType
     None,
     DoubleJumpItem,
     DashItem,
-    RotateItem
+    RotateItem,
+    TeleportItem
 }
 
 public class Item : MonoBehaviour
