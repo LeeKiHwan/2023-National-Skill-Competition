@@ -59,7 +59,7 @@ public abstract class BaseEnemy : MonoBehaviour
         else
         {
             hp -= damage;
-            if (!isAttacked)
+            if (!isAttacked && !targetTower.GetComponent<IllusionTower>())
             {
                 SetTarget(attackTower);
                 isAttacked = true;
