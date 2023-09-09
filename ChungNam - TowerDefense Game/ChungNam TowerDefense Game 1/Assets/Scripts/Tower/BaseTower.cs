@@ -31,6 +31,17 @@ public abstract class BaseTower : MonoBehaviour
         return Physics.OverlapSphere(transform.position, atkRange, 1 << LayerMask.NameToLayer("Monster")).Length > 0;
     }
 
+    public void TakeDamage(int damage)
+    {
+        if (hp - damage <= 0) Die();
+        else hp -= damage;
+    }
+
+    public void Die()
+    {
+        Debug.Log("Die");
+    }
+
     private void OnDrawGizmos()
     {
         if (onDrawGizmos)

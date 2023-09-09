@@ -17,7 +17,7 @@ public class BasicTower : BaseTower
 
         if (monsters.Length > 0)
         {
-            monsters[0].GetComponent<BaseEnemy>().TakeDamage(damage);
+            monsters[0].GetComponent<BaseEnemy>().TakeDamage(damage, this);
         }
     }
 }

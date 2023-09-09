@@ -18,7 +18,7 @@ public class MultiAttackTower : BaseTower
 
         for (int i = 0; i < cnt; i++)
         {
-            monsters[i].GetComponent<BaseEnemy>().TakeDamage(damage);
+            monsters[i].GetComponent<BaseEnemy>().TakeDamage(damage, this);
         }
     }
 }

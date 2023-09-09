@@ -26,7 +26,7 @@ public class FocusAttackTower : BaseTower
 
             for (int i = 0; i < cnt; i++)
             {
-                monstersInAttackArea[i].GetComponent<BaseEnemy>().TakeDamage(damage);
+                monstersInAttackArea[i].GetComponent<BaseEnemy>().TakeDamage(damage, this);
             }
         }
     }
