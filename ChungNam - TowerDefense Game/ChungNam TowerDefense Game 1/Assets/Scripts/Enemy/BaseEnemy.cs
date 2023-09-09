@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
 public abstract class BaseEnemy : MonoBehaviour
 {
     public NavMeshAgent agent;
+    public Animator anim;
 
     [Header("Status Data")]
     public int hp;
@@ -24,6 +26,7 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         if (CanAttack()) agent.isStopped = true;
         else agent.isStopped = false;
+        anim.SetBool("isMove", !agent.isStopped);
 
         if (atkCurTime > 0) atkCurTime -= Time.deltaTime;
         else if (atkCurTime <= 0 && CanAttack())

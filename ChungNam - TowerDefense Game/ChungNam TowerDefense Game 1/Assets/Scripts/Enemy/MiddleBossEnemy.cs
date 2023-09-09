@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemy : BaseEnemy
+public class MiddleBossEnemy : BaseEnemy
 {
     private void Awake()
     {
