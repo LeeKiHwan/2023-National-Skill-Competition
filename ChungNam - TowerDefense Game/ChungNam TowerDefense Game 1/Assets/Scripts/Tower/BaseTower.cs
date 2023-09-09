@@ -11,6 +11,7 @@ public abstract class BaseTower : MonoBehaviour
     public int price;
 
     [Header("Attackable Data")]
+    public Transform turret;
     public int damage;
     public float atkCoolTime;
     public float atkCurTime;
@@ -39,7 +40,7 @@ public abstract class BaseTower : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Die");
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

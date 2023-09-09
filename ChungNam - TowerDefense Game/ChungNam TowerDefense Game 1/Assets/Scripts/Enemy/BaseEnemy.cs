@@ -52,8 +52,6 @@ public abstract class BaseEnemy : MonoBehaviour
     public abstract void Attack();
     public void TakeDamage(int damage, BaseTower attackTower)
     {
-        Debug.Log("Enemy Damaged");
-
         if (hp - damage <= 0) Die();
         else
         {
@@ -115,7 +113,10 @@ public abstract class BaseEnemy : MonoBehaviour
     public void SetTarget(BaseTower targetTower)
     {
         this.targetTower = targetTower;
-        agent.SetDestination(targetTower.transform.position);
+        if (targetTower != null)
+        {
+            agent.SetDestination(targetTower.transform.position);
+        }
     }
 
     public void Die()

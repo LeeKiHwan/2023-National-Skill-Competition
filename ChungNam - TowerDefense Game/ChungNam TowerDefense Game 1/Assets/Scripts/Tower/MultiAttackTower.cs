@@ -18,6 +18,7 @@ public class MultiAttackTower : BaseTower
 
         for (int i = 0; i < cnt; i++)
         {
+            turret.LookAt(new Vector3(monsters[i].transform.position.x, transform.position.y, monsters[i].transform.position.z));
             monsters[i].GetComponent<BaseEnemy>().TakeDamage(damage, this);
         }
     }
