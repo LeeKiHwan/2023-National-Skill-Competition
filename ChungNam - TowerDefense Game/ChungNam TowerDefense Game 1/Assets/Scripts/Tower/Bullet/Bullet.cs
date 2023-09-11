@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BasicTowerBullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    public BaseEnemy targetEnemy;
+    public GameObject target;
     public float speed;
 
     private void Awake()
@@ -15,21 +15,21 @@ public class BasicTowerBullet : MonoBehaviour
 
     private void Update()
     {
-        if (targetEnemy == null) Destroy(gameObject);
+        if (target == null) Destroy(gameObject, 0.1f);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    public void SetTarget(BaseEnemy targetEnemy, float speed)
+    public void SetTarget(GameObject target, float speed)
     {
-        transform.LookAt(new Vector3(targetEnemy.transform.position.x, 0.5f, targetEnemy.transform.position.z));
+        transform.LookAt(new Vector3(target.transform.position.x, 0.5f, target.transform.position.z));
 
-        this.targetEnemy = targetEnemy;
+        this.target = target;
         this.speed = speed;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<BaseEnemy>() == targetEnemy)
+        if (other.gameObject == target)
         {
             Destroy(gameObject);
         }

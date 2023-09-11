@@ -9,6 +9,7 @@ public abstract class BaseTower : MonoBehaviour
     [Header("Tower Data")]
     public int hp;
     public int price;
+    public Vector2 size;
 
     [Header("Attackable Data")]
     public Transform turret;
@@ -29,7 +30,7 @@ public abstract class BaseTower : MonoBehaviour
     }
     public bool CanAttack()
     {
-        return Physics.OverlapSphere(transform.position, atkRange, 1 << LayerMask.NameToLayer("Monster")).Length > 0;
+        return Physics.OverlapSphere(transform.position, atkRange, 1 << LayerMask.NameToLayer("Enemy")).Length > 0;
     }
 
     public void TakeDamage(int damage)

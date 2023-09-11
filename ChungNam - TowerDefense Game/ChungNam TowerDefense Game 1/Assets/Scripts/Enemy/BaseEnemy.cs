@@ -40,7 +40,18 @@ public abstract class BaseEnemy : MonoBehaviour
             SetTargetProtectFacility();
             if (isAttacked) isAttacked = false;
         }
+
+        LookTarget();
     }
+
+    public void LookTarget()
+    {
+        if (targetTower != null)
+        {
+            transform.LookAt(targetTower.transform);
+        }
+    }
+
     public bool CanAttack()
     {
         Collider[] checkedTowers = Physics.OverlapSphere(transform.position, atkRange, 1 << LayerMask.NameToLayer("Tower"));
@@ -124,6 +135,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     public void Die()
     {
+        TowerManager.Instance.GetGold(dropGold);
         Destroy(gameObject);
     }
 

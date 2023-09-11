@@ -11,9 +11,9 @@ TagManager:
   - Tower
   - Water
   - UI
-  - Monster
-  - 
-  - 
+  - Enemy
+  - Ground
+  - Map Camera
   - 
   - 
   - 
