@@ -12,6 +12,7 @@ public class InGameManager : MonoBehaviour
 
     [Header("Enemy")]
     public int curWave;
+    public float waveReadyTime;
     public Transform[] enemySpawnPos;
     public GameObject[] normalEnemys;
     public GameObject middleBossEnemy;
@@ -31,6 +32,14 @@ public class InGameManager : MonoBehaviour
 
     IEnumerator SpawnMonsterCo()
     {
+        waveReadyTime = 10;
+
+        while (waveReadyTime > 0)
+        {
+            waveReadyTime -= Time.deltaTime;
+            yield return null;
+        }
+
         int spawnCount = 0;
 
         for (int i = 0; i < spawnCounts.Length; i++)
