@@ -62,6 +62,6 @@ public class CameraMove : MonoBehaviour
         float x = (map.width * (mP.x - newRect.x) / newRect.width) + map.x;
         float z = (map.height * (mP.y - newRect.y) / newRect.height) + map.y;
 
-        transform.position = new Vector3(x, transform.position.y, z);
+        transform.position = new Vector3(x, transform.position.y, z-6);
     }
 }

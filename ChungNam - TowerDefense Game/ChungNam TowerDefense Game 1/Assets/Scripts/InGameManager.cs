@@ -22,15 +22,15 @@ public class InGameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        SpawnMonster();
+        GameStart();
     }
 
-    public void SpawnMonster()
+    public void GameStart()
     {
-        StartCoroutine(SpawnMonsterCo());
+        StartCoroutine(WaveReady());
     }
 
-    IEnumerator SpawnMonsterCo()
+    IEnumerator WaveReady()
     {
         waveReadyTime = 10;
 
@@ -40,6 +40,18 @@ public class InGameManager : MonoBehaviour
             yield return null;
         }
 
+        UIManager.Instance.StartWaveUI();
+
+        yield break;
+    }
+
+    public void WaveStart()
+    {
+        StartCoroutine(WaveStartCo());
+    }
+
+    IEnumerator WaveStartCo()
+    {
         int spawnCount = 0;
 
         for (int i = 0; i < spawnCounts.Length; i++)
@@ -70,11 +82,30 @@ public class InGameManager : MonoBehaviour
 
             Instantiate(enemy, spawnPos.position, Quaternion.identity);
             spawnCount--;
-            yield return new WaitForSeconds(Random.Range(1, 3));
+            yield return new WaitForSeconds(Random.Range(0.25f, 0.75f));
         }
 
-        Debug.Log("Wave End");
+        while (FindObjectsOfType<BaseEnemy>().Length > 0)
+        {
+            yield return new WaitForSeconds(1);
+        }
+
+        if (curWave < spawnCounts.Length)
+        {
+            curWave++;
+            StartCoroutine(WaveReady());
+        }
+        else
+        {
+            StageClear();
+        }
+
 
         yield break;
+    }
+
+    public void StageClear()
+    {
+
     }
 }
