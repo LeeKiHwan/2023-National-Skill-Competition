@@ -29,6 +29,10 @@ public class UIManager : MonoBehaviour
     public Transform itemUI;
     public TextMeshProUGUI itemText;
 
+    [Header("Sound")]
+    public AudioClip explainSFX;
+    public AudioClip gameOverSFX;
+
     private void Awake()
     {
         Cursor.visible = true;
@@ -70,6 +74,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        SoundManager.Instance.PlaySFX(gameOverSFX);
         gameOver.SetActive(true);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("EndGame");
@@ -113,6 +118,7 @@ public class UIManager : MonoBehaviour
             for (int j=0; j < text[i].Length;j++)
             {
                 explainText.text += text[i][j];
+                SoundManager.Instance.PlaySFX(explainSFX);
                 yield return new WaitForSeconds(0.05f);
             }
             yield return new WaitForSeconds(1.5f);

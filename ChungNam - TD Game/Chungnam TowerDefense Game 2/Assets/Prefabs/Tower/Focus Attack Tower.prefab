@@ -114,6 +114,7 @@ MonoBehaviour:
   atkArea: 3
   muzzle: {fileID: 5915154244017058604}
   bullet: {fileID: 455128176410986319, guid: b61755767dcb4b74f9e3c67de8237abc, type: 3}
+  attackSFX: {fileID: 8300000, guid: 41430f8f7a92986428de190b1471de24, type: 3}
 --- !u!65 &3941720630219888480
 BoxCollider:
   m_ObjectHideFlags: 0

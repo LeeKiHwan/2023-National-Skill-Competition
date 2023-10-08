@@ -11,6 +11,14 @@ public class MenuManager : MonoBehaviour
     public TextMeshProUGUI[] names;
     public TextMeshProUGUI[] scores;
 
+    public AudioClip bgm;
+    public AudioClip uiInteract;
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayBGM(bgm);
+    }
+
     private void Update()
     {
         Cursor.visible = false;
@@ -37,6 +45,11 @@ public class MenuManager : MonoBehaviour
             names[i].text = RankingManager.Instance.ranking[i].Name;
             scores[i].text = RankingManager.Instance.ranking[i].score + " p";
         }
+    }
+
+    public void UIClick()
+    {
+        SoundManager.Instance.PlaySFX(uiInteract);
     }
 
     public void Quit()

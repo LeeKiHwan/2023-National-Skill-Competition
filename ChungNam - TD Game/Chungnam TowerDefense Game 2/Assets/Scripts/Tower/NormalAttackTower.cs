@@ -7,9 +7,11 @@ public class NormalAttackTower : BaseTower
     public Transform turret;
     public Transform muzzle;
     public GameObject bullet;
+    public AudioClip attackSFX;
 
     public override void Attack()
     {
+        SoundManager.Instance.PlaySFX(attackSFX, 0.3f);
         BaseEnemy enemy = EnemysInAtkRange()[0].GetComponent<BaseEnemy>();
         Vector3 enemyPos = new Vector3(enemy.transform.position.x, 1, enemy.transform.position.z);
 

@@ -181,6 +181,10 @@ MonoBehaviour:
   - {fileID: 916524987}
   - {fileID: 855796087}
   - {fileID: 1195007068}
+  rankInsertSFX: {fileID: 8300000, guid: 66179209ed46a7c4dbb067e4c95710f7, type: 3}
+  bgm: {fileID: 8300000, guid: 5565957290620614b909ce21c36fbaff, type: 3}
+  scoreSFX: {fileID: 8300000, guid: 4f292578a82a2f345b42f487d7277e73, type: 3}
+  scoreEndSFX: {fileID: 8300000, guid: a500a8a8c02b05e4fb28ec6360861de7, type: 3}
 --- !u!1 &96033034
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,10 +753,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

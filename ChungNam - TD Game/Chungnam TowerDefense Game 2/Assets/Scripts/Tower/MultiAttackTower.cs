@@ -7,9 +7,11 @@ public class MultiAttackTower : BaseTower
     public Transform turret;
     public Transform muzzle;
     public GameObject bullet;
+    public AudioClip attackSFX;
 
     public override void Attack()
     {
+        SoundManager.Instance.PlaySFX(attackSFX, 0.3f);
         int cnt = 0;
         foreach(Collider enemy in EnemysInAtkRange())
         {

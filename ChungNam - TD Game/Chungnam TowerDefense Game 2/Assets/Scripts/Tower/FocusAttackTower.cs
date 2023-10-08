@@ -8,9 +8,11 @@ public class FocusAttackTower : BaseTower
     public float atkArea;
     public Transform muzzle;
     public GameObject bullet;
+    public AudioClip attackSFX;
 
     public override void Attack()
     {
+        SoundManager.Instance.PlaySFX(attackSFX, 0.3f);
         Vector3 targetPos = EnemysInAtkRange()[0].transform.position;
         Collider[] enemys = Physics.OverlapSphere(targetPos, atkArea, 1 << LayerMask.NameToLayer("Enemy"));
 

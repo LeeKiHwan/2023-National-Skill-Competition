@@ -15897,6 +15897,13 @@ MonoBehaviour:
     m_Bits: 8
   onBuild: 0
   buildEffect: {fileID: 2296901679685035263, guid: c2952b2d2c8fe854dacfc934f8a6e910, type: 3}
+  purchaseSFX: {fileID: 8300000, guid: 9b75ade92bbc4fa45b90c80380637fa4, type: 3}
+  itemSFX: {fileID: 8300000, guid: 9ad8832cbd51c7040a8201fb7e3433ac, type: 3}
+  buildSFX: {fileID: 8300000, guid: 0f81894956ae36a469895824abbfc8f1, type: 3}
+  bombSFX: {fileID: 8300000, guid: b2afbe8e9f1c306448ea9671a5765ff0, type: 3}
+  fireSFX: {fileID: 8300000, guid: 261459b26990f1542a0b148e61d4c224, type: 3}
+  slowSFX: {fileID: 8300000, guid: b5c542c5903e8eb47b520d1fcb4d8f42, type: 3}
+  attackSpeedSFX: {fileID: 8300000, guid: 8b3945cc788e9804cad8e91b828e23db, type: 3}
 --- !u!1001 &1240709833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22038,10 +22045,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -23412,6 +23419,8 @@ MonoBehaviour:
   - {fileID: 611703107}
   - {fileID: 1348876945}
   - {fileID: 762308219}
+  bgm: {fileID: 8300000, guid: 175982bf968fa8046896b0a817f90bc1, type: 3}
+  stageClearSFX: {fileID: 8300000, guid: 827c0b9bea7bcaf4dac1a0a10434d3de, type: 3}
 --- !u!1001 &1815682738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23550,6 +23559,8 @@ MonoBehaviour:
   explainText: {fileID: 1110884271}
   itemUI: {fileID: 1260865730}
   itemText: {fileID: 1461552192}
+  explainSFX: {fileID: 8300000, guid: cd00085861921304bb60a907ef5a28d8, type: 3}
+  gameOverSFX: {fileID: 8300000, guid: 9fd8bd34f4cdf4c43aa983948f031edc, type: 3}
 --- !u!1001 &1821269639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28258,6 +28269,7 @@ MonoBehaviour:
   atkRange: 10
   atkCool: 1
   atkCur: 0
+  attackSFX: {fileID: 0}
 --- !u!195 &8845950928088662865
 NavMeshAgent:
   m_ObjectHideFlags: 0

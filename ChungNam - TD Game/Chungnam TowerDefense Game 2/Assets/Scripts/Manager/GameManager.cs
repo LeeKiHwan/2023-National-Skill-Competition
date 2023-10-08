@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,6 +32,10 @@ public class GameManager : MonoBehaviour
     public WaveData[] waveDatas;
     public Transform[] spawnPos;
 
+    [Header("Sound")]
+    public AudioClip bgm;
+    public AudioClip stageClearSFX;
+
     private void Awake()
     {
         Instance = this;
@@ -38,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.PlayBGM(bgm);
+
         if (curStage == 0)
         {
             string[] s = { "타워 어드벤처에 온걸 환영합니다.", "타워 어드벤처는 타워를 건설해 몰려오는 적으로부터 최종 보호 시설을 보호하는 타워디펜스 게임입니다.",
@@ -125,6 +132,7 @@ public class GameManager : MonoBehaviour
     public void StageClear()
     {
         UIManager.Instance.OnStageClearUI();
+        SoundManager.Instance.PlaySFX(stageClearSFX);
         if (curStage == 1)
         {
             string[] s = { "축하합니다! 적들을 모두 해치웠습니다!"};

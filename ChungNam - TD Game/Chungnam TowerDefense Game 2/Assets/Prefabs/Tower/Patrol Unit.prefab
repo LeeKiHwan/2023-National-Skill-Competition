@@ -140,6 +140,7 @@ MonoBehaviour:
   atkRange: 10
   atkCool: 1
   atkCur: 0
+  attackSFX: {fileID: 8300000, guid: 4e42c0dbc05bbec479062ca7aa50fbaf, type: 3}
 --- !u!195 &7368281253923930405
 NavMeshAgent:
   m_ObjectHideFlags: 0

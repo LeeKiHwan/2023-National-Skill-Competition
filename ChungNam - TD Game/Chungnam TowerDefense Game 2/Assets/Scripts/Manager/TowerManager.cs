@@ -14,6 +14,15 @@ public class TowerManager : MonoBehaviour
     public bool onBuild;
     public GameObject buildEffect;
 
+    [Header("Sound")]
+    public AudioClip purchaseSFX;
+    public AudioClip itemSFX;
+    public AudioClip buildSFX;
+    public AudioClip bombSFX;
+    public AudioClip fireSFX;
+    public AudioClip slowSFX;
+    public AudioClip attackSpeedSFX;
+
     private void Awake()
     {
         Instance = this;
@@ -43,6 +52,7 @@ public class TowerManager : MonoBehaviour
     public void SelectTower(GameObject tower)
     {
         if (gold < tower.GetComponent<BaseTower>().price) return;
+        SoundManager.Instance.PlaySFX(purchaseSFX);
         buildIndicator.SetActive(true);
         selectedTower = tower;
         onBuild = true;
@@ -58,6 +68,13 @@ public class TowerManager : MonoBehaviour
 
         if (onBuild && Input.GetMouseButtonDown(0))
         {
+            SoundManager.Instance.PlaySFX(buildSFX);
+
+            if (selectedTower.GetComponent<Bomb>()) SoundManager.Instance.PlaySFX(bombSFX);
+            if (selectedTower.GetComponent<Fire>()) SoundManager.Instance.PlaySFX(fireSFX);
+            if (selectedTower.GetComponent<Slow>()) SoundManager.Instance.PlaySFX(slowSFX);
+            if (selectedTower.GetComponent<AttackSpeed>()) SoundManager.Instance.PlaySFX(attackSpeedSFX);
+
             gold -= selectedTower.GetComponent<BaseTower>().price;
             Instantiate(selectedTower, GetMousePos(), Quaternion.identity);
             Instantiate(buildEffect, GetMousePos(), Quaternion.identity);
@@ -92,6 +109,7 @@ public class TowerManager : MonoBehaviour
                     UIManager.Instance.ItemUI("GOLD +200", Color.yellow);
                     break;
             }
+            SoundManager.Instance.PlaySFX(itemSFX);
             gold -= 50;
         }
     }

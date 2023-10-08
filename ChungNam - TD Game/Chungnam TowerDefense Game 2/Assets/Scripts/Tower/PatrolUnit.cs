@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class PatrolUnit : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class PatrolUnit : MonoBehaviour
     public float atkRange;
     public float atkCool;
     public float atkCur;
+    public AudioClip attackSFX;
 
     private void Update()
     {
@@ -43,6 +43,8 @@ public class PatrolUnit : MonoBehaviour
 
     public void Attack()
     {
+        SoundManager.Instance.PlaySFX(attackSFX, 0.3f);
+
         BaseEnemy enemy = EnemysInAtkRange()[0].GetComponent<BaseEnemy>();
         Vector3 enemyPos = new Vector3(enemy.transform.position.x, 1, enemy.transform.position.z);
 

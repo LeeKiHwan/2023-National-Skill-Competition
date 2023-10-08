@@ -64,6 +64,7 @@ MonoBehaviour:
   turret: {fileID: 8377713172342085609}
   muzzle: {fileID: 4373488167681476296}
   bullet: {fileID: 455128176410986319, guid: 6155937727a93404baa6b60f2a885f39, type: 3}
+  attackSFX: {fileID: 8300000, guid: fbcd8f8ad88e0b946b3971de13442a1c, type: 3}
 --- !u!65 &989810162025385887
 BoxCollider:
   m_ObjectHideFlags: 0

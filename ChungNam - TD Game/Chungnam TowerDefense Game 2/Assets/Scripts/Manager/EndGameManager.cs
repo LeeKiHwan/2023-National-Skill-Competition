@@ -18,11 +18,17 @@ public class EndGameManager : MonoBehaviour
     public TextMeshProUGUI[] names;
     public TextMeshProUGUI[] scores;
 
+    public AudioClip rankInsertSFX;
+    public AudioClip bgm;
+    public AudioClip scoreSFX;
+    public AudioClip scoreEndSFX;
+
     private void Awake()
     {
+        SoundManager.Instance.PlayBGM(bgm);
         Instance = this;
 
-        gameScore.text = "Score : " + GameManager.score + " P";
+        StartCoroutine(ScoreCo());
 
         ShowRanking();
 
@@ -42,6 +48,26 @@ public class EndGameManager : MonoBehaviour
         Cursor.visible = false;
 
         cursor.position = Input.mousePosition;
+    }
+
+    public IEnumerator ScoreCo()
+    {
+        int score = 0;
+        int scoreSound = 0;
+        while (GameManager.score >= score)
+        {
+            score+=100;
+            scoreSound += 1;
+            if (scoreSound % 10 == 0)
+            {
+                SoundManager.Instance.PlaySFX(scoreSFX);
+            }
+            gameScore.text = score + " P";
+            yield return new WaitForSeconds(0.01f);
+        }
+        SoundManager.Instance.PlaySFX(scoreEndSFX);
+
+        yield break;
     }
 
     public void GoToMenu()
@@ -66,6 +92,7 @@ public class EndGameManager : MonoBehaviour
 
     public void InsertRank()
     {
+        SoundManager.Instance.PlaySFX(rankInsertSFX);
         RankInfo rankInfo = new RankInfo();
         rankInfo.Name = nameInputField.text;
         rankInfo.score = GameManager.score;
