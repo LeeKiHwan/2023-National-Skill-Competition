@@ -194,5 +194,9 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(patrolUnit, Vector3.zero, Quaternion.identity);
         }
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            SceneManager.LoadScene("EndGame");
+        }
     }
 }
