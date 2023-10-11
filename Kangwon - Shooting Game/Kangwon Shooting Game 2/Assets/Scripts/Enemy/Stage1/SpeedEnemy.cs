@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class SpeedEnemy : BaseEnemy
 {
+    private void Awake()
+    {
+        speed = PlayerAttackManager.Instance.player.speed * 1.5f;
+    }
+
     public override void Attack()
     {
     }
 
     public override void Move()
     {
-        speed = PlayerAttackManager.Instance.player.speed * 1.5f;
         Vector2 target = PlayerAttackManager.Instance.player.transform.position;
         Vector2 dir = target - (Vector2)transform.position;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stage3Boss : BaseEnemy
@@ -14,6 +15,7 @@ public class Stage3Boss : BaseEnemy
     public GameObject blackFire;
     public GameObject ironShot;
     public float ironShotSpeed;
+    public bool isDie;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class Stage3Boss : BaseEnemy
 
     public IEnumerator AttackCo()
     {
-        while (true)
+        while (!isDie)
         {
             int atkIdx = Random.Range(0, 3);
 
@@ -100,5 +102,20 @@ public class Stage3Boss : BaseEnemy
 
         Vector2 dir = PlayerAttackManager.Instance.player.transform.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime);
+    }
+
+    public override void Die()
+    {
+        isDie = true;
+        StartCoroutine(DieCo());
+    }
+
+    public IEnumerator DieCo()
+    {
+        anim.SetBool("IsDie", true);
+        yield return new WaitForSeconds(1f);
+        InGameManager.Instance.StageClear();
+
+        yield break;
     }
 }

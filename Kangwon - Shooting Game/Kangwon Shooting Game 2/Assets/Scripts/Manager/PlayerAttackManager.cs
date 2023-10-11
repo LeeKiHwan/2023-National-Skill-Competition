@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType
+{
+    Shotgun,
+    Sniper,
+    RPG
+}
+
 public class PlayerAttackManager : MonoBehaviour
 {
     public static PlayerAttackManager Instance;
@@ -42,6 +49,24 @@ public class PlayerAttackManager : MonoBehaviour
     public float basicBulletCool;
     public float basicBulletCur;
 
+    [Header("Shotgun")]
+    public bool onShotgun;
+    public GameObject shotgunBullet;
+    public int shotgunDamage;
+    public float shotgunSpeed;
+
+    [Header("Sniper")]
+    public bool onSniper;
+    public GameObject sniperBullet;
+    public int sniperDamage;
+    public float sniperSpeed;
+
+    [Header("RPG")]
+    public bool onRPG;
+    public GameObject RPGBullet;
+    public int RPGDamage;
+    public float RPGSpeed;
+
     private void Awake()
     {
         if (Instance == null)
@@ -63,6 +88,7 @@ public class PlayerAttackManager : MonoBehaviour
 
         UseSkill();
         Attack();
+        UseWeapon();
     }
 
     public void UseSkill()
@@ -136,15 +162,9 @@ public class PlayerAttackManager : MonoBehaviour
         if (xp + getXp < maxXp) xp += getXp;
         else
         {
+            GetItem();
             xp = 0;
-            LevelUp();
         }
-    }
-
-    public void LevelUp()
-    {
-        GetItem();
-        BasicBulletUpgrade();
     }
 
     public void GetItem()
@@ -169,28 +189,69 @@ public class PlayerAttackManager : MonoBehaviour
         }
     }
 
-    public void BasicBulletUpgrade()
+    public void GetWeapon(WeaponType weaponType)
     {
-        int i = Random.Range (0, 5);
-
-        switch(i)
+        switch (weaponType)
         {
-            case 0:
-                basicBulletDamage += 1;
-                player.OnTextUI("+ BulletDamage", Color.red);
+            case WeaponType.Shotgun:
+                onShotgun = true;
+                onSniper = false;
+                onRPG = false;
                 break;
-            case 1:
-                basicBulletSpeed += 1;
-                player.OnTextUI("+ BulletSpeed", Color.red);
+            case WeaponType.Sniper:
+                onSniper = true;
+                onShotgun = false;
+                onRPG = false;
                 break;
-            case 2:
-                basicBulletSpread *= 0.9f;
-                player.OnTextUI("+ Accurate", Color.red);
+            case WeaponType.RPG:
+                onRPG = true;
+                onShotgun = false;
+                onSniper = false;
                 break;
-            case 3:
-                basicBulletCool *= 0.9f;
-                player.OnTextUI("+ FireRate", Color.red);
-                break;
+        }
+    }
+
+    public void UseWeapon()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (onShotgun)
+            {
+                for (int i=0; i<20; i++)
+                {
+                    Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+                    Vector2 dir = target - (Vector2)player.muzzle.transform.position;
+
+                    GameObject b = Instantiate(shotgunBullet, player.muzzle.position, Quaternion.identity);
+                    b.transform.up = dir.normalized;
+                    b.GetComponent<Bullet>().SetBulletStatus(shotgunDamage, shotgunSpeed);
+                    Instantiate(flash, player.muzzle.position, Quaternion.identity);
+                }
+            }
+            if (onSniper)
+            {
+                Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 dir = target - (Vector2)player.muzzle.transform.position;
+
+                GameObject b = Instantiate(sniperBullet, player.muzzle.position, Quaternion.identity);
+                b.transform.up = dir.normalized;
+                b.GetComponent<Bullet>().SetBulletStatus(sniperDamage, sniperSpeed, true);
+                Instantiate(flash, player.muzzle.position, Quaternion.identity);
+            }
+            if (onRPG)
+            {
+                Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 dir = target - (Vector2)player.muzzle.transform.position;
+
+                GameObject b = Instantiate(RPGBullet, player.muzzle.position, Quaternion.identity);
+                b.transform.up = dir.normalized;
+                b.GetComponent<Bullet>().SetBulletStatus(RPGDamage, RPGSpeed);
+                Instantiate(flash, player.muzzle.position, Quaternion.identity);
+            }
+
+            onShotgun = false;
+            onSniper = false;
+            onRPG = false;
         }
     }
 }

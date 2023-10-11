@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +16,9 @@ public class UIManager : MonoBehaviour
     public Image invcBg;
     public Image speedBg;
     public Image healBg;
+    public GameObject shotgunImg;
+    public GameObject sniperImg;
+    public GameObject rpgImg;
 
     [Header("Game")]
     public Image fadeInOut;
@@ -51,6 +53,31 @@ public class UIManager : MonoBehaviour
         invcBg.fillAmount = PlayerAttackManager.Instance.invcCur / PlayerAttackManager.Instance.invcCool;
         speedBg.fillAmount = PlayerAttackManager.Instance.speedCur / PlayerAttackManager.Instance.speedCool;
         healBg.fillAmount = PlayerAttackManager.Instance.healCur / PlayerAttackManager.Instance.healCool;
+
+        if (PlayerAttackManager.Instance.onShotgun)
+        {
+            shotgunImg.SetActive(true);
+            sniperImg.SetActive(false);
+            rpgImg.SetActive(false);
+        }
+        else if (PlayerAttackManager.Instance.onSniper)
+        {
+            shotgunImg.SetActive(false);
+            sniperImg.SetActive(true);
+            rpgImg.SetActive(false);
+        }
+        else if (PlayerAttackManager.Instance.onRPG)
+        {
+            shotgunImg.SetActive(false);
+            sniperImg.SetActive(false);
+            rpgImg.SetActive(true);
+        }
+        else
+        {
+            shotgunImg.SetActive(false);
+            sniperImg.SetActive(false);
+            rpgImg.SetActive(false);
+        }
     }
 
     public void SetGameUI()
@@ -109,11 +136,5 @@ public class UIManager : MonoBehaviour
                 uiMat.color = Color.white;
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(new Vector2(-6f, 3), new Vector2(5, 3));
     }
 }

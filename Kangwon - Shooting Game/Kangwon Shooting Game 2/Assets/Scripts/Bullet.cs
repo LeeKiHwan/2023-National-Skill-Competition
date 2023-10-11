@@ -15,11 +15,12 @@ public class Bullet : MonoBehaviour
 
     public int damage;
     public float speed;
+    public bool isDontDestroy;
     public GameObject destroyEffect;
 
     private void Awake()
     {
-        Destroy(gameObject,5);
+        Destroy(gameObject, 5);
     }
 
     private void Update()
@@ -27,10 +28,11 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector2.up * speed * Time.deltaTime);   
     }
 
-    public void SetBulletStatus(int damage, float speed)
+    public void SetBulletStatus(int damage, float speed, bool isDontDestroy = false)
     {
         this.damage = damage;
         this.speed = speed;
+        this.isDontDestroy = isDontDestroy;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,12 +41,13 @@ public class Bullet : MonoBehaviour
         {
             collision.GetComponent<Unit>().TakeDamage(damage);
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+
+            if (!isDontDestroy) Destroy(gameObject);
         }
         if (collision.CompareTag("Player") && bulletType == BulletType.Enemy)
         {
             collision.GetComponent<Unit>().TakeDamage(damage);
-            Destroy(gameObject);
+            if (!isDontDestroy) Destroy(gameObject);
         }
     }
 }

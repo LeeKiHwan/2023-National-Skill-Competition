@@ -32,7 +32,7 @@ public class EndGameManager : MonoBehaviour
 
         ShowRanking();
 
-        if (RankingManager.Instance.ranking.Count < 3 || RankingManager.Instance.ranking[2].score < GameManager.score)
+        if (RankingManager.Instance.ranking.Count < 3 || RankingManager.Instance.ranking[2].Score < GameManager.score)
         {
             rankInsertUI.SetActive(true);
         }
@@ -86,7 +86,7 @@ public class EndGameManager : MonoBehaviour
         for (int i = 0; i < RankingManager.Instance.ranking.Count; i++)
         {
             names[i].text = RankingManager.Instance.ranking[i].Name;
-            scores[i].text = RankingManager.Instance.ranking[i].score + " P";
+            scores[i].text = RankingManager.Instance.ranking[i].Score + " P";
         }
     }
 
@@ -95,7 +95,7 @@ public class EndGameManager : MonoBehaviour
         SoundManager.Instance.PlaySFX(rankInsertSFX);
         RankInfo rankInfo = new RankInfo();
         rankInfo.Name = nameInputField.text;
-        rankInfo.score = GameManager.score;
+        rankInfo.Score = GameManager.score;
 
         RankingManager.Instance.InsertRank(rankInfo);
         nameText.text = "Name : " + nameInputField.text;

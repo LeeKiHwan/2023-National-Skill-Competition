@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc71ae9e672604aa8526769041ff0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 35000
+  hp: 3000
   damage: 10
   speed: 3
   isBoss: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   bullet: {fileID: 2765617399333125419, guid: 9c75f939ee1f94e41a40be7c7997b92c, type: 3}
   bulletSpeed: 10
   atkCool: 2
+  isDie: 0
 --- !u!1 &2100401279286342304
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class Stage2Boss : BaseEnemy
 
     public IEnumerator AttackCo()
     {
-        while (true)
+        while (!isDie)
         {
             int atkIdx = Random.Range(0, 4);
 
@@ -136,6 +136,7 @@ public class Stage2Boss : BaseEnemy
         }
 
         InGameManager.Instance.StageClear();
+        InGameManager.Instance.GetScore(10000);
         Destroy(gameObject);
 
         yield break;

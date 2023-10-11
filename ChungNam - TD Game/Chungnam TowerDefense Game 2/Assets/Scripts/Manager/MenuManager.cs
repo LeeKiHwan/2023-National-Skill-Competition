@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour
         for (int i = 0; i < RankingManager.Instance.ranking.Count; i++)
         {
             names[i].text = RankingManager.Instance.ranking[i].Name;
-            scores[i].text = RankingManager.Instance.ranking[i].score + " p";
+            scores[i].text = RankingManager.Instance.ranking[i].Score + " p";
         }
     }
 

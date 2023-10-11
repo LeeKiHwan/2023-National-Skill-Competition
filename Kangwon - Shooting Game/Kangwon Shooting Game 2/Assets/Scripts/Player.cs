@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public struct PlayerTextUI
 {
@@ -43,10 +44,17 @@ public class Player : Unit
     public RectTransform textParent;
     public GameObject textObj;
 
-
+    [Header("Gun")]
+    public static Sprite selectedGun;
+    public SpriteRenderer gunSR;
 
     private void Awake()
     {
+        if ((InGameManager.Instance.curStage==0 || InGameManager.Instance.curStage==2) && selectedGun)
+        {
+            gunSR.sprite = selectedGun;
+        }
+
         rb = GetComponent<Rigidbody2D>();
 
         StartCoroutine(GetMpCo());
@@ -95,11 +103,10 @@ public class Player : Unit
             gun.rotation = target.x - transform.position.x > 0 ? Quaternion.identity : Quaternion.Euler(new Vector2(0, 180));
         }
     }
-
     public override void Die()
     {
+        SceneManager.LoadScene("EndGame");
     }
-
     public override void Move()
     {
         float x = Input.GetAxisRaw("Horizontal") * speed;
@@ -107,7 +114,6 @@ public class Player : Unit
         
         rb.velocity = new Vector2(x, y);
     }
-
     public override void TakeDamage(int damage)
     {
         if (invcTime <= 0)
@@ -127,7 +133,6 @@ public class Player : Unit
         else hp = maxHp;
         OnTextUI("+ " + heal + "HP", Color.green);
     }
-
     public void SetInvcTime(float time)
     {
         if (time > invcTime)
@@ -142,7 +147,6 @@ public class Player : Unit
         StartCoroutine(SpeedUpCo(speedValue, time));
         OnTextUI("Speed Up!", Color.yellow);
     }
-
     public IEnumerator SpeedUpCo(float speedValue, float time)
     {
         speed += speedValue;
@@ -160,7 +164,6 @@ public class Player : Unit
         else mp = maxMp;
         OnTextUI("+ " + getMp + "MP", Color.cyan);
     }
-
     public IEnumerator GetMpCo()
     {
         while (true)
@@ -176,7 +179,6 @@ public class Player : Unit
         PlayerTextUI p = new PlayerTextUI(text, color);
         textQueue.Enqueue(p);
     }
-
     public void InstantiateTextUI()
     {
         if (textQueue.Count > 0)
@@ -197,7 +199,6 @@ public class Player : Unit
     {
         StartCoroutine(CameraShakeCo());    
     }
-
     public IEnumerator CameraShakeCo()
     {
         for (int i = 0; i < 10; i++)

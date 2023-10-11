@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b7f2ca6b3b798418bc312e9d5060fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 50000
+  hp: 5000
   damage: 10
   speed: 3
   isBoss: 1
@@ -115,6 +115,7 @@ MonoBehaviour:
   blackFire: {fileID: 2613464829365961658, guid: a14b1a33a012bda458e5c6cc5ccb94f7, type: 3}
   ironShot: {fileID: 1313538713687119296, guid: 997c8a121483af44bbd4885b8f2c9fc1, type: 3}
   ironShotSpeed: 12
+  isDie: 0
 --- !u!61 &681244755999259445
 BoxCollider2D:
   m_ObjectHideFlags: 0
