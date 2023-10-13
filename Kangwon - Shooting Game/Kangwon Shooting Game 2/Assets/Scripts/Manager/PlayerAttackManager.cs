@@ -67,6 +67,9 @@ public class PlayerAttackManager : MonoBehaviour
     public int RPGDamage;
     public float RPGSpeed;
 
+    [Header("Sound")]
+    public AudioClip attackSFX;
+
     private void Awake()
     {
         Instance = this;
@@ -137,6 +140,8 @@ public class PlayerAttackManager : MonoBehaviour
 
         if (basicBulletCur <= 0 && Input.GetMouseButton(0))
         {
+            SoundManager.Instance.PlaySFX(attackSFX);
+
             Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(Random.Range(-basicBulletSpread, basicBulletSpread), Random.Range(-basicBulletSpread, basicBulletSpread));
             Vector2 dir = target - (Vector2)player.muzzle.transform.position;
 

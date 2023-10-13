@@ -662,6 +662,7 @@ MonoBehaviour:
   - 0.75
   enemySpawnCool: 2
   enemySpawnCur: 0
+  bgm: {fileID: 8300000, guid: 5b9810f800e26fd4c9ed4cfbb60d4e3c, type: 3}
 --- !u!1 &156439425
 GameObject:
   m_ObjectHideFlags: 0

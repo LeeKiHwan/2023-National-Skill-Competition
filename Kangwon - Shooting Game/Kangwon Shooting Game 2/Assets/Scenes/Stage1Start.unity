@@ -1227,6 +1227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffddbba3a8a932458bcc15ba977b04d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgm: {fileID: 8300000, guid: f70bdac19308a0c40960b9391b3205a7, type: 3}
 --- !u!1 &943537658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,7 +1809,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 3590324223
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

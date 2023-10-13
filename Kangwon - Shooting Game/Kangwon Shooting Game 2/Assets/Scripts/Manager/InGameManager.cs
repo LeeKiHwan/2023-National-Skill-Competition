@@ -22,6 +22,9 @@ public class InGameManager : MonoBehaviour
     public float enemySpawnCool;
     public float enemySpawnCur;
 
+    [Header("Sound")]
+    public AudioClip bgm;
+
     private void Awake()
     {
         Instance = this;
@@ -29,6 +32,8 @@ public class InGameManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.PlayBGM(bgm);
+
         StartCoroutine(SpawnWeaponCo());
     }
 

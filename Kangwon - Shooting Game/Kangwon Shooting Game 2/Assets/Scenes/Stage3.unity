@@ -356,6 +356,7 @@ MonoBehaviour:
   - 1
   enemySpawnCool: 2
   enemySpawnCur: 0
+  bgm: {fileID: 8300000, guid: 5b9810f800e26fd4c9ed4cfbb60d4e3c, type: 3}
 --- !u!1 &168918433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,7 +1662,7 @@ MonoBehaviour:
   healCur: 0
   flash: {fileID: 7874745076693815235, guid: 87fc65d678b0203488b6d130111343c1, type: 3}
   basicBullet: {fileID: 2844370370635050590, guid: fe694f2dcc67ca04f91e462cfd250d84, type: 3}
-  basicBulletDamage: 5
+  basicBulletDamage: 1000
   basicBulletSpeed: 20
   basicBulletSpread: 0.25
   basicBulletCool: 0.1

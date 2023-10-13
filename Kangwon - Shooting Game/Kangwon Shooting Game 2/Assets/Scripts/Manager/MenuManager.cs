@@ -15,6 +15,15 @@ public class MenuManager : MonoBehaviour
     public TextMeshProUGUI[] names;
     public TextMeshProUGUI[] scores;
 
+    public AudioClip bgm;
+    public AudioClip gunSFX;
+    public AudioClip uiInteractSFX;
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayBGM(bgm);
+    }
+
     public void GameStart()
     {
         InGameManager.score = 0;
@@ -38,6 +47,8 @@ public class MenuManager : MonoBehaviour
     {
         if (curWeapon < weaponImgs.Length-1)
         {
+            SoundManager.Instance.PlaySFX(gunSFX);
+
             weaponStats[curWeapon].SetActive(false);
 
             curWeapon++;
@@ -50,6 +61,8 @@ public class MenuManager : MonoBehaviour
     {
         if (curWeapon > 0)
         {
+            SoundManager.Instance.PlaySFX(gunSFX);
+
             weaponStats[curWeapon].SetActive(false);
 
             curWeapon--;
@@ -71,6 +84,11 @@ public class MenuManager : MonoBehaviour
             names[i].text = RankingManager.Instance.ranking[i].Name;
             scores[i].text = RankingManager.Instance.ranking[i].Score + " P";
         }
+    }
+
+    public void UIInteract()
+    {
+        SoundManager.Instance.PlaySFX(uiInteractSFX);
     }
 
     public void Quit()

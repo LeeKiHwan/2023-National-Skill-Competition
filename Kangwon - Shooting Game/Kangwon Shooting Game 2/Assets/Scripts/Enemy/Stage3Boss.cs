@@ -91,17 +91,20 @@ public class Stage3Boss : BaseEnemy
 
     public override void Move()
     {
-        if (PlayerAttackManager.Instance.player.transform.position.x - transform.position.x < 0)
+        if (!isDie)
         {
-            body.transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            body.transform.rotation = Quaternion.identity;
-        }
+            if (PlayerAttackManager.Instance.player.transform.position.x - transform.position.x < 0)
+            {
+                body.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                body.transform.rotation = Quaternion.identity;
+            }
 
-        Vector2 dir = PlayerAttackManager.Instance.player.transform.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime);
+            Vector2 dir = PlayerAttackManager.Instance.player.transform.position - transform.position;
+            transform.Translate(dir.normalized * speed * Time.deltaTime);
+        }
     }
 
     public override void Die()
@@ -112,8 +115,8 @@ public class Stage3Boss : BaseEnemy
 
     public IEnumerator DieCo()
     {
-        anim.SetBool("IsDie", true);
-        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("IsDie");
+        yield return new WaitForSeconds(10f);
         InGameManager.Instance.StageClear();
 
         yield break;
