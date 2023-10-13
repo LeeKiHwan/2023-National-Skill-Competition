@@ -50210,6 +50210,9 @@ MonoBehaviour:
   RPGDamage: 50
   RPGSpeed: 15
   attackSFX: {fileID: 8300000, guid: 0568cea9c16c6a547b020fc433a35e42, type: 3}
+  shotgunSFX: {fileID: 8300000, guid: 7178bce12a1382d4091c913d173bdd8f, type: 3}
+  sniperSFX: {fileID: 8300000, guid: 22ed6228e7070aa4dbb39b17a743514a, type: 3}
+  rpgSFX: {fileID: 8300000, guid: a6a9f631730dec04e893a45af345191f, type: 3}
 --- !u!4 &1622275068
 Transform:
   m_ObjectHideFlags: 0

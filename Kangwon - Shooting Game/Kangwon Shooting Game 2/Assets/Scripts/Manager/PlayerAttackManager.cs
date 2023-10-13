@@ -69,6 +69,9 @@ public class PlayerAttackManager : MonoBehaviour
 
     [Header("Sound")]
     public AudioClip attackSFX;
+    public AudioClip shotgunSFX;
+    public AudioClip sniperSFX;
+    public AudioClip rpgSFX;
 
     private void Awake()
     {
@@ -214,6 +217,7 @@ public class PlayerAttackManager : MonoBehaviour
         {
             if (onShotgun)
             {
+                SoundManager.Instance.PlaySFX(shotgunSFX);
                 for (int i=0; i<20; i++)
                 {
                     Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
@@ -227,6 +231,7 @@ public class PlayerAttackManager : MonoBehaviour
             }
             if (onSniper)
             {
+                SoundManager.Instance.PlaySFX(sniperSFX);
                 Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 dir = target - (Vector2)player.muzzle.transform.position;
 
@@ -237,6 +242,7 @@ public class PlayerAttackManager : MonoBehaviour
             }
             if (onRPG)
             {
+                SoundManager.Instance.PlaySFX(rpgSFX);
                 Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 dir = target - (Vector2)player.muzzle.transform.position;
 
