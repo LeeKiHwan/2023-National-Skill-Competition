@@ -1708,86 +1708,6 @@ MonoBehaviour:
   scoreText: {fileID: 38310523}
   bossSpawnTimeText: {fileID: 259712437}
   uiMat: {fileID: 2100000, guid: 73208216a2bb8d547926b495831a87e0, type: 2}
---- !u!1 &588678493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 588678495}
-  - component: {fileID: 588678494}
-  m_Layer: 0
-  m_Name: Player Attack Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &588678494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588678493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c98071f1b9f94943a01f3a8070d1e01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  xp: 0
-  maxXp: 40
-  allAtkEffect: {fileID: 4569651761505107860, guid: 779b8aff84b020f4492c3379d7ae7be9, type: 3}
-  allAtkDamage: 50
-  allAtkCool: 10
-  allAtkCur: 0
-  invcTime: 3
-  invcCool: 10
-  invcCur: 0
-  speedValue: 3
-  speedTime: 3
-  speedCool: 10
-  speedCur: 0
-  healValue: 20
-  healCool: 10
-  healCur: 0
-  flash: {fileID: 7874745076693815235, guid: 87fc65d678b0203488b6d130111343c1, type: 3}
-  basicBullet: {fileID: 2844370370635050590, guid: fe694f2dcc67ca04f91e462cfd250d84, type: 3}
-  basicBulletDamage: 40
-  basicBulletSpeed: 30
-  basicBulletSpread: 0.1
-  basicBulletCool: 0.05
-  basicBulletCur: 0
-  onShotgun: 0
-  shotgunBullet: {fileID: 0}
-  shotgunDamage: 0
-  shotgunSpeed: 0
-  onSniper: 0
-  sniperBullet: {fileID: 0}
-  sniperDamage: 0
-  sniperSpeed: 0
-  onRPG: 0
-  RPGBullet: {fileID: 0}
-  RPGDamage: 0
-  RPGSpeed: 0
---- !u!4 &588678495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588678493}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3940349, y: 0.67857146, z: -0.013003603}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616222887
 GameObject:
   m_ObjectHideFlags: 0
@@ -10113,6 +10033,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953977358}
   m_CullTransparentMesh: 1
+--- !u!1 &1966144778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966144780}
+  - component: {fileID: 1966144779}
+  m_Layer: 0
+  m_Name: Player Attack Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1966144779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966144778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c98071f1b9f94943a01f3a8070d1e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  xp: 0
+  maxXp: 50
+  allAtkEffect: {fileID: 4569651761505107860, guid: 779b8aff84b020f4492c3379d7ae7be9, type: 3}
+  allAtkDamage: 50
+  allAtkCool: 10
+  allAtkCur: 0
+  invcTime: 3
+  invcCool: 10
+  invcCur: 0
+  speedValue: 3
+  speedTime: 3
+  speedCool: 10
+  speedCur: 0
+  healValue: 20
+  healCool: 10
+  healCur: 0
+  flash: {fileID: 7874745076693815235, guid: 87fc65d678b0203488b6d130111343c1, type: 3}
+  basicBullet: {fileID: 2844370370635050590, guid: fe694f2dcc67ca04f91e462cfd250d84, type: 3}
+  basicBulletDamage: 5
+  basicBulletSpeed: 20
+  basicBulletSpread: 0.25
+  basicBulletCool: 0.1
+  basicBulletCur: 0
+  onShotgun: 0
+  shotgunBullet: {fileID: 2844370370635050590, guid: a513f7114d5467646a961b2ffd89e455, type: 3}
+  shotgunDamage: 20
+  shotgunSpeed: 10
+  onSniper: 0
+  sniperBullet: {fileID: 2844370370635050590, guid: 1231eba2d359b2a4381af24952e805f0, type: 3}
+  sniperDamage: 100
+  sniperSpeed: 20
+  onRPG: 0
+  RPGBullet: {fileID: 2844370370635050590, guid: de2e611ea0857a1468fd32de7af66a06, type: 3}
+  RPGDamage: 50
+  RPGSpeed: 15
+--- !u!4 &1966144780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966144778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3940349, y: 0.67857146, z: -0.013003603}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1970756802
 GameObject:
   m_ObjectHideFlags: 0
