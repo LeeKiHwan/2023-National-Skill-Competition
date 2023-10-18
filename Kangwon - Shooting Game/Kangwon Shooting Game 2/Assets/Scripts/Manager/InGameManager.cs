@@ -47,6 +47,7 @@ public class InGameManager : MonoBehaviour
         {
             SpawnEnemy();
         }
+        CheatKey();
     }
 
     public IEnumerator SpawnWeaponCo()
@@ -244,6 +245,13 @@ public class InGameManager : MonoBehaviour
             foreach(BaseEnemy enemy in FindObjectsOfType<BaseEnemy>())
             {
                 enemy.TakeDamage(10000);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            if (!isBossSpawned)
+            {
+                bossSpawnTime = 1;
             }
         }
     }

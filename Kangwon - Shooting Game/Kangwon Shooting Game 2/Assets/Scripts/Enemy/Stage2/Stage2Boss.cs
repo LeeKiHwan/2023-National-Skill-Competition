@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Stage2Boss : BaseEnemy
 {
@@ -13,6 +14,7 @@ public class Stage2Boss : BaseEnemy
     private void Awake()
     {
         StartCoroutine(AttackCo());
+        StartCoroutine(FirstMoveCo());
     }
 
     public override void TakeDamage(int damage)
@@ -20,6 +22,52 @@ public class Stage2Boss : BaseEnemy
         if (!isDie)
         {
             base.TakeDamage(damage);
+        }
+    }
+
+    public IEnumerator FirstMoveCo()
+    {
+        while (transform.position.y > 2)
+        {
+            transform.Translate(Vector2.down * Time.deltaTime * speed);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1);
+        StartCoroutine(MoveCo());
+        yield break;
+    }
+
+    public IEnumerator MoveCo()
+    {
+        while (true)
+        {
+            int rand = Random.Range(0, 2);
+            Vector3 basePos = transform.position;
+            Vector3 targetPos = Vector2.zero;
+            if (rand == 0)
+            {
+                targetPos = new Vector2(-5f, transform.position.y);
+
+            }
+            else if (rand == 1)
+            {
+                targetPos = new Vector2(5f, transform.position.y);
+            }
+
+            while (transform.position != targetPos)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime * speed);
+                yield return null;
+            }
+            yield return new WaitForSeconds(3);
+
+            while (transform.position != basePos)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, basePos, Time.deltaTime * speed);
+                yield return null;
+            }
+            yield return new WaitForSeconds(3);
         }
     }
 
@@ -113,10 +161,6 @@ public class Stage2Boss : BaseEnemy
 
     public override void Move()
     {
-        if (transform.position.y > 2)
-        {
-            transform.Translate(Vector2.down * Time.deltaTime * speed);
-        }
     }
 
     public override void Die()

@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
+using System;
 
 public class MenuManager : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class MenuManager : MonoBehaviour
     public AudioClip bgm;
     public AudioClip gunSFX;
     public AudioClip uiInteractSFX;
+
+    private void Awake()
+    {
+    }
 
     private void Start()
     {
